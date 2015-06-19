@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language appid="1002324229">
+	<score>Score</score>
+	<bestscore>High Score</bestscore>
+	<replay>Restart</replay>
+	<quit>Quit</quit>
+  <guide>Hold your finger on screen to stretch out the stick</guide>
+  <end>Game Over!</end>
+  <share>Share</share>
+  <record>Record!</record>
+</language>
