@@ -15,6 +15,7 @@ public class HeroController : MonoBehaviour {
     private BlockFactory bf;
     public AudioSource cross;
     public AudioSource bonous;
+    public AudioSource fall;
     public Text GameTip;
     public enum HERO_STATE { IDLE, STAMP, PUSH, RUN };//用于控制动画
     void Awake()
@@ -222,5 +223,7 @@ public class HeroController : MonoBehaviour {
         yield return new  WaitForSeconds(0.3f);
         GetComponent<Animator>().speed = 1;
         rigidbody2D.gravityScale = 10;
+        if (fall)
+            fall.Play();
     }
 }

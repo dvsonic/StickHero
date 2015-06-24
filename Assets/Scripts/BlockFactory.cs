@@ -49,7 +49,7 @@ public class BlockFactory : MonoBehaviour {
 
     public GameObject CreateBlock(Transform lastBlock)
     {
-        int index = Random.Range(0, blockList.Length - 1);
+        int index = Random.Range(0, blockList.Length);
         Object prefab = blockList[index];
         GameObject obj = Instantiate(prefab, lastBlock.transform.position, new Quaternion()) as GameObject;
         Transform blockBG = obj.transform.Find("BlockBG");

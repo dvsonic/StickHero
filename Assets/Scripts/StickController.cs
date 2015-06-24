@@ -13,6 +13,8 @@ public class StickController : MonoBehaviour {
     public AudioSource grow;
     public AudioSource drop;
     public AudioSource fall;
+    public AudioSource hit;
+    public AudioSource miss;
 	void Start () {
         _initScale = transform.localScale;
 	}
@@ -42,6 +44,13 @@ public class StickController : MonoBehaviour {
                         {
                             _targetBlock.transform.Find("BonusTip").gameObject.SetActive(true);
                             GameData.score++;
+                            if (hit)
+                                hit.Play();
+                        }
+                        else
+                        {
+                            if (miss)
+                                miss.Play();
                         }
                     }
                     EventManager.getInstance().trigger(Event_Name.STICK_FALL_END);
