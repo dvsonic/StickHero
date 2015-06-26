@@ -29,15 +29,10 @@ public class AdController : MonoBehaviour {
         }
     }
 
-    private List<ADConfig> adList;
     IEnumerator LoadConfig()
     {
-        adList = new List<ADConfig>();
-        Debug.Log("Start:" + Time.time);
         WWW w = new WWW(adConfig);
         yield return w;
-        Debug.Log("Finish:" + Time.time);
-        string config = w.text;
         if (string.IsNullOrEmpty(w.text))
         {
             Debug.Log("load config error");

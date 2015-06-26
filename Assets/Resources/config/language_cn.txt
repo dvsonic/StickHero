@@ -1,0 +1,5 @@
+score	当前积分
+bestscore	最高积分
+record	新记录
+guide	将手放在屏幕上使杆变长
+end	游戏结束

@@ -6,7 +6,6 @@ public class MainUIController : MonoBehaviour {
 
 
     public Text TFScore;
-    public Text TFGuide;
     public Text TFBanaer;
     void Awake()
     {
@@ -16,7 +15,6 @@ public class MainUIController : MonoBehaviour {
 	void Start () {
         GameData.score = 0;
         GameData.banana = 0;
-        TFGuide.text = GameData.getLanguage().SearchForChildByTag("guide").Text;
         Camera.main.GetComponent<AudioSource>().clip = Resources.Load("music/bgm" + GameData.BGIndex) as AudioClip;
         Camera.main.GetComponent<AudioSource>().Play();
 	}

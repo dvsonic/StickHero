@@ -20,7 +20,7 @@ public class HeroController : MonoBehaviour {
     public enum HERO_STATE { IDLE, STAMP, PUSH, RUN };//用于控制动画
     void Awake()
     {
-        GameTip.text = GameData.getLanguage().SearchForChildByTag("guide").Text;
+        GameTip.text = GameData.getLanguage("guide");
     }
 	// Use this for initialization
 	void Start () {

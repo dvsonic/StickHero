@@ -130,10 +130,8 @@ public class StickController : MonoBehaviour {
 
     public enum STATE { IDLE, GROW, DROP, CROSS,FALL}
     private STATE _curState;
-    private GameObject _curBlock;
     void Reset(GameObject block)
     {
-        _curBlock = block;
         _curState = STATE.IDLE;
         transform.localScale = _initScale;
         transform.rotation = new Quaternion();

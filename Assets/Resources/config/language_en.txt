@@ -1,0 +1,5 @@
+score	Score
+bestscore	HighScore
+record	Record
+guide	Hold your finger on screen to stretch out the stick
+end	GameOver
