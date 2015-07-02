@@ -4,65 +4,96 @@ using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 using System;
 
-public class ADMob : MonoBehaviour {
+public class ADMob : MonoBehaviour
+{
 
     public enum ADType { BANNER, INTERSTITIAL };
     public ADType type;
     public string unitId;
 
     private BannerView banner = null;
-    private InterstitialAd interstitial = null; 
-	// Use this for initialization
-	void Start () {
+    private InterstitialAd interstitial = null;
+    // Use this for initialization
+    void Start()
+    {
         if (AdController.admob_show)
         {
-            if (type == ADType.BANNER)
+            if (type == ADType.BANNER && AdController.bannerInventor == AdController.ADInventor.admob)
             {
-                banner = new BannerView(unitId, AdSize.Banner, AdPosition.Bottom);
-                banner.AdLoaded += HandleAdLoaded;
-                banner.AdFailedToLoad += HandleAdFailedToLoad;
-                banner.AdOpened += HandleAdOpened;
-                banner.AdClosing += HandleAdClosing;
-                banner.AdClosed += HandleAdClosed;
-                banner.AdLeftApplication += HandleAdLeftApplication;
-                banner.LoadAd(new AdRequest.Builder()
-                    .AddTestDevice("8CABE432D4C46F1D7F276DADF83D9945")
-                    .Build());
+                if (banner == null)
+                {
+                    banner = new BannerView(unitId, AdSize.Banner, AdPosition.Bottom);
+                    banner.AdLoaded += HandleAdLoaded;
+                    banner.AdFailedToLoad += HandleAdFailedToLoad;
+                    banner.AdOpened += HandleAdOpened;
+                    banner.AdClosing += HandleAdClosing;
+                    banner.AdClosed += HandleAdClosed;
+                    banner.AdLeftApplication += HandleAdLeftApplication;
+                    banner.LoadAd(new AdRequest.Builder()
+                        .AddTestDevice("8CABE432D4C46F1D7F276DADF83D9945")
+                        .Build());
+                }
             }
-            else
+            else if (AdController.interstitialInventor == AdController.ADInventor.admob)
             {
-                interstitial = new InterstitialAd(unitId);
-                interstitial.AdLoaded += HandleInterstitialLoaded;
-                interstitial.AdFailedToLoad += HandleInterstitialFailedToLoad;
-                interstitial.AdOpened += HandleInterstitialOpened;
-                interstitial.AdClosing += HandleInterstitialClosing;
-                interstitial.AdClosed += HandleInterstitialClosed;
-                interstitial.AdLeftApplication += HandleInterstitialLeftApplication;
-                interstitial.LoadAd(new AdRequest.Builder()
-                    .AddTestDevice("8CABE432D4C46F1D7F276DADF83D9945")
-                    .Build());
+                if (interstitial == null)
+                {
+                    interstitial = new InterstitialAd(unitId);
+                    interstitial.AdLoaded += HandleInterstitialLoaded;
+                    interstitial.AdFailedToLoad += HandleInterstitialFailedToLoad;
+                    interstitial.AdOpened += HandleInterstitialOpened;
+                    interstitial.AdClosing += HandleInterstitialClosing;
+                    interstitial.AdClosed += HandleInterstitialClosed;
+                    interstitial.AdLeftApplication += HandleInterstitialLeftApplication;
+                    interstitial.LoadAd(new AdRequest.Builder()
+                        .AddTestDevice("8CABE432D4C46F1D7F276DADF83D9945")
+                        .Build());
+                }
                 _isShow = false;
+
             }
         }
 
-	}
-	
-	// Update is called once per frame
+    }
+
+    public void RestartAdmob()
+    {
+        Start();
+    }
+
+    /*void OnEnable()
+    {
+        Start();
+    }
+
+    void OnDisable()
+    {
+        DestroyAD();
+    }*/
+
+    // Update is called once per frame
     private bool _isShow;
-	void Update () {
-        if (interstitial!= null && interstitial.IsLoaded() && !_isShow)
+    void Update()
+    {
+        if (interstitial != null && interstitial.IsLoaded() && !_isShow)
         {
             interstitial.Show();
             _isShow = true;
         }
-	}
+    }
 
     public void DestroyAD()
     {
         if (banner != null)
+        {
             banner.Destroy();
+            banner = null;
+        }
         if (interstitial != null)
+        {
             interstitial.Destroy();
+            interstitial = null;
+        }
     }
 
     public void HandleAdLoaded(object sender, EventArgs args)
